@@ -4,6 +4,10 @@
 
 Finance Tracker is a modern web application for managing personal finances. It provides tools to track expenses, analyze spending, and visualize financial data with an intuitive interface.
 
+## Screenshot
+
+![screenshot](./screenshots/finance-trakcer.png)
+
 ## Features
 
 - Dashboard with summary cards
