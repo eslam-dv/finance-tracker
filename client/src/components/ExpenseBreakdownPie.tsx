@@ -38,7 +38,10 @@ const ExpenseBreakdownPie = ({ data }: { data: Expensedata[] }) => {
         <div className="flex gap-3 bg-white rounded-md p-1 items-center dark:text-black">
           <span
             className={`h-2 w-2`}
-            style={{ backgroundColor: chartConfig[entry.name as keyof typeof chartConfig].color }}
+            style={{
+              backgroundColor:
+                chartConfig[entry.name as keyof typeof chartConfig].color,
+            }}
           ></span>
           <p className="font-semibold">{entry.name}</p>
           <p>{percent}%</p>
