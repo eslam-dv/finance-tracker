@@ -9,7 +9,7 @@ import Analysis from "./pages/Analysis";
 const App = () => {
   return (
     <>
-      <Router>
+      <Router basename="/finance-trakcer">
         <Navbar />
         <Routes>
           <Route path="/" element={<AppLayout />}>
