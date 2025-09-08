@@ -8,20 +8,7 @@ import { type Category } from "@/components/Transaction";
 import { AppContext } from "@/context/appContext";
 
 const Dashboard = () => {
-  const { transactions } = useContext(AppContext);
-
-  const income = transactions.filter((item) => item.type == "income");
-  const expense = transactions.filter((item) => item.type == "expense");
-
-  const totalIncome = income.reduce(
-    (sum, item) => sum + Number(item.amount),
-    0,
-  );
-  const totalExpenses = expense.reduce(
-    (sum, item) => sum + Number(item.amount),
-    0,
-  );
-  const balance = totalIncome - totalExpenses;
+  const { transactions, totalIncome, expense, totalExpense, balance } = useContext(AppContext);
 
   const totals = expense.reduce<Record<Category, number>>(
     (acc, { category, amount }) => {
@@ -30,6 +17,7 @@ const Dashboard = () => {
     },
     {} as Record<Category, number>,
   );
+
   const expensesByCategory = Object.entries(totals).map(
     ([category, amount]) => ({
       category: category as Category,
@@ -50,7 +38,7 @@ const Dashboard = () => {
         <div className="grid sm:grid-cols-3 gap-5">
           <Summarycard title="Balance" amount={balance} />
           <Summarycard title="Income" amount={totalIncome} />
-          <Summarycard title="Expenses" amount={totalExpenses} />
+          <Summarycard title="Expenses" amount={totalExpense} />
         </div>
 
         <div className="mt-5 flex flex-col lg:flex-row-reverse gap-5 ">

@@ -76,8 +76,7 @@ client/
 
 ## Todo
 
-1. Finish Analysis page.
-2. Create a backend and link it to the frontend
+1. Create a backend and link it to the frontend
 
 ## License
 

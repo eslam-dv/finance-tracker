@@ -1,6 +1,6 @@
 import type { TransactionType } from "@/components/Transaction";
 import { getTrasactions } from "@/lib/handleTransaction";
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useMemo } from "react";
 
 export type Theme = "dark" | "light";
 
@@ -9,6 +9,11 @@ type AppContextType = {
   setTheme: (theme: Theme) => void;
   transactions: TransactionType[];
   setTransactions: (transactions: TransactionType[]) => void;
+  income: TransactionType[];
+  totalIncome: number;
+  expense: TransactionType[];
+  totalExpense: number;
+  balance: number;
 };
 
 type AppProviderType = {
@@ -22,6 +27,11 @@ const initialState: AppContextType = {
   setTheme: () => null,
   transactions: [],
   setTransactions: () => null,
+  income: [],
+  totalIncome: 0,
+  expense: [],
+  totalExpense: 0,
+  balance: 0,
 };
 
 export const AppContext = createContext<AppContextType>(initialState);
@@ -45,6 +55,22 @@ export const AppContextProvider = ({
     root.classList.add(theme);
   }, [theme]);
 
+  const { income, totalIncome, expense, totalExpense, balance } = useMemo(() => {
+    const income = transactions.filter((t) => t.type === "income");
+    const totalIncome = income.reduce((sum, t) => (sum += t.amount), 0);
+
+    const expense = transactions.filter((t) => t.type === "expense");
+    const totalExpense = expense.reduce((sum, t) => (sum += t.amount), 0);
+
+    return {
+      income,
+      totalIncome,
+      expense,
+      totalExpense,
+      balance: totalIncome - totalExpense,
+    };
+  }, [transactions]);
+
   const value = {
     theme,
     setTheme: (theme: Theme) => {
@@ -55,6 +81,11 @@ export const AppContextProvider = ({
     setTransactions: (transactions: TransactionType[]) => {
       setTransactions(transactions);
     },
+    income,
+    totalIncome,
+    expense,
+    totalExpense,
+    balance,
   };
 
   return (

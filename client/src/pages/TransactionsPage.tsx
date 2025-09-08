@@ -41,6 +41,8 @@ const TransactionsPage = () => {
 
   return (
     <section className="my-5">
+      <h2 className="text-center text-2xl font-bold mb-5">Transactions</h2>
+
       <div className="flex flex-wrap gap-5 justify-between items-center mb-5">
         <div className="flex flex-wrap gap-5 items-center">
           <Select
