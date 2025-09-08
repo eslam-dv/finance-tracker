@@ -42,7 +42,7 @@ const TransactionsPage = () => {
   return (
     <section className="my-5">
       <div className="flex flex-wrap gap-5 justify-between items-center mb-5">
-        <div className="flex gap-5 items-center">
+        <div className="flex flex-wrap gap-5 items-center">
           <Select
             value={category}
             onValueChange={(val) => setCategory(val as Category)}
@@ -80,17 +80,18 @@ const TransactionsPage = () => {
         </div>
         <div className="flex items-center gap-5">
           <span className="text-zinc-400">
-            Number of transactions: {filteredTransactions.length}
+            Transactions: {filteredTransactions.length}
           </span>
 
-          <CSVLink
-            data={filteredTransactions}
-            headers={headers}
-            filename="transactions.csv"
-            className="py-2 px-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90"
-          >
-            Save as CSV
-          </CSVLink>
+          <Button className="cursor-pointer">
+            <CSVLink
+              data={filteredTransactions}
+              headers={headers}
+              filename="transactions.csv"
+            >
+              Save as CSV
+            </CSVLink>
+          </Button>
         </div>
       </div>
       <div className="container mx-auto flex flex-col gap-5">
